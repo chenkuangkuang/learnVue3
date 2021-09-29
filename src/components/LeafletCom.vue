@@ -1,34 +1,22 @@
 <template>
   <div id="map" ref="map"></div>
-  <el-select
-    v-model="curCountry"
-    placeholder="选择国家"
-    @change="changeCountry"
-  >
-    <el-option
-      v-for="item in allContries"
-      :key="item.name"
-      :label="item.name"
-      :value="item.name"
-    >
-    </el-option>
-  </el-select>
+  <SearchCom :focusMapCountry="focusMapCountry" ref="searchRef" />
 </template>
 
 <script>
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./leaflet.ChineseTmsProviders"; //引入中国地图，高德等
-import allContries from "../allContries";
+import SearchCom from "./SearchCom.vue";
 import allCountriesGeojson from "./allCountriesGeojson.json";
 
 export default {
   name: "LeafletCom",
+  components: {
+    SearchCom,
+  },
   data() {
-    return {
-      allContries,
-      curCountry: '',
-    };
+    return {};
   },
   methods: {
     initMap() {
@@ -155,7 +143,10 @@ export default {
             setTimeout(() => {
               console.log("=e=Countries=mouseup", e.target.feature);
               //   if (!isClickPointRef.current) {
-              that.focusSelectCountry(e.target.feature);
+              const targetCountry = e.target.feature;
+              that.countryGroups.clearLayers();
+              that.focusMapCountry(targetCountry);
+              that.$refs.searchRef.focusSelectCountry(targetCountry);
               //   }
             }, 0);
           });
@@ -171,8 +162,8 @@ export default {
       that.countriesGroups &&
         that.countriesGroups.addTo(that.leafletInstanceRef);
     },
-    focusCountries(matchCountry) {
-      console.log("=focusCountries=", matchCountry);
+    focusMapCountry(matchCountry) {
+      console.log("=focusMapCountry=", matchCountry);
       this.countryGroups.clearLayers();
       var that = this;
       L.geoJson(matchCountry, {
@@ -211,24 +202,9 @@ export default {
       });
       that.countryGroups && that.countryGroups.addTo(that.leafletInstanceRef);
     },
-    focusSelectCountry(targetCountry){
-        console.log('=targetCountry=', targetCountry);
-        this.curCountry = targetCountry.properties.cname;
-    },
-    changeCountry(countryName) {
-      console.log("=countryName=", countryName, allCountriesGeojson);
-      const matchCountry = allCountriesGeojson.features.find(
-        (i) => i.properties.cname == countryName
-      );
-      this.focusCountries(matchCountry);
-    },
   },
   mounted() {
-    console.log("leaflet mounted", allContries);
     this.initMap();
-    // setTimeout(() => {
-
-    // }, 1000);
   },
 };
 </script>
@@ -236,6 +212,6 @@ export default {
 <style>
 #map {
   width: 100%;
-  height: 800px;
+  height: 100vh;
 }
 </style>

@@ -1,5 +1,4 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld msg="Hello Vue 3.0 + Vite111" />
 </template>
 
@@ -15,7 +14,17 @@ export default {
 </script>
 
 <style scoped>
+hmtl,body{
+
+}
 img{
   width: 50px;
+}
+</style>
+
+<style >
+*{
+  margin: 0;
+  padding: 0;
 }
 </style>

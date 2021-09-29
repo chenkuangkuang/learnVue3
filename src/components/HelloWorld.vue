@@ -1,6 +1,4 @@
 <template>
-  <!-- <h1 :title="name">{{ msg }}</h1> -->
-  <!-- <NewCom /> -->
   <LeafletCom />
 </template>
 
