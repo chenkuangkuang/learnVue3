@@ -6,6 +6,8 @@
     "build": "vite build"
   },
   "dependencies": {
+    "element-plus": "^1.1.0-beta.17",
+    "leaflet": "^1.7.1",
     "vue": "^3.0.4"
   },
   "devDependencies": {
