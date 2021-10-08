@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "echarts": "^5.2.1",
     "element-plus": "^1.1.0-beta.17",
     "leaflet": "^1.7.1",
     "vue": "^3.0.4"

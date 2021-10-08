@@ -1,6 +1,7 @@
 <template>
   <div id="map" ref="map"></div>
   <SearchCom :focusMapCountry="focusMapCountry" ref="searchRef" />
+  <IndustryChartsCom />
 </template>
 
 <script>
@@ -8,12 +9,14 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./leaflet.ChineseTmsProviders"; //引入中国地图，高德等
 import SearchCom from "./SearchCom.vue";
+import IndustryChartsCom from "./IndustryChartsCom.vue";
 import allCountriesGeojson from "./allCountriesGeojson.json";
 
 export default {
   name: "LeafletCom",
   components: {
     SearchCom,
+    IndustryChartsCom
   },
   data() {
     return {};

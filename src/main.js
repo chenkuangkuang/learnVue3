@@ -1,10 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import './index.css'
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-
+import './element-var.scss';
+import './index.css'
 const app = createApp(App);
 
 app.use(ElementPlus);
